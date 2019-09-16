@@ -52,6 +52,6 @@ class Controller extends Package
     }
 
     public function uninstall(){
-
+        parent::uninstall();
     }
 }

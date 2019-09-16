@@ -3,4 +3,9 @@
     <blocktypes>
         <blocktype handle="team_manager" package="team_manager"/>
     </blocktypes>
+    <blocktypesets>
+        <blocktypeset handle="social">
+            <blocktype handle="team_manager"/>
+        </blocktypeset>
+    </blocktypesets>
 </concrete5-cif>
