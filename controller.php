@@ -22,7 +22,7 @@ class Controller extends Package
 
     public function getPackageDescription()
     {
-        return t('Concrete5 Block that allows Users to create and manage teams using c5 groups.');
+        return t('Concrete5 Block that allows Users to create and manage teams (using Groups) and invite other Users.');
     }
 
     public function on_start()
