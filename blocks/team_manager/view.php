@@ -23,6 +23,7 @@ $wh = Core::make('helper/form/user_selector')
                         <?php endforeach; ?>
                         <div class="list-group-footer">
                             <form class="team-manager-invite-form form-inline" action="<?=$this->action('inviteUser')?>" method="POST">
+                                <input type="hidden" name="inviteGroup" value="<?=$group->getGroupID()?>">
                                 <input type="hidden" name="ccm_token" value="<?=Core::make('token')->generate('inviteUser');?>"/>
                                 <div class="input-group">
                                     <?=$wh->quickSelect('inviteUser',false);?>
