@@ -57,8 +57,8 @@ class Controller extends BlockController
     public function action_createTeam()
     {
         // if the data is valid, we process it
-        $errors = $this->validate($this->post(),'createTeam');
-        if($errors === true){
+        $errors = $this->validate($this->post(), 'createTeam');
+        if ($errors === true) {
             $th = Core::make('helper/text');
             $parentGroup = Group::getByID($this->gID);
             $teamName = $th->sanitize($this->post('teamName'));
@@ -75,12 +75,31 @@ class Controller extends BlockController
 
     public function action_inviteUser()
     {
-        $errors = $this->validate($this->post(),'inviteUser');
-        if($errors === true){
+        $errors = $this->validate($this->post(), 'inviteUser');
+        if ($errors === true) {
             $u = User::getByUserID($this->post('inviteUser'));
             $g = Group::getByID($this->post('inviteGroup'));
             // @todo for now we just add new users directly, it might be better to send invites to ask if they want to join
             $u->enterGroup($g);
+        } else {
+            $this->set('errors', $errors);
+        };
+
+        $this->view();
+    }
+
+    public function action_leaveTeam($uID, $gID, $token)
+    {
+        $errors = $this->validate([
+            'uID' => $uID,
+            'gID' => $gID,
+            'ccm_token' => $token
+        ], 'leaveTeam');
+
+        if($errors === true){
+            $u = User::getByUserID($uID);
+            $g = Group::getByID($gID);
+            $u->exitGroup($g);
         } else {
             $this->set('errors', $errors);
         };

@@ -1,5 +1,6 @@
 <?php defined('C5_EXECUTE') or die("Access Denied.");
-$wh = Core::make('helper/form/user_selector')
+$wh = Core::make('helper/form/user_selector');
+$me = new User();
 ;?>
 
 <div class="team-manager-block">
@@ -10,28 +11,28 @@ $wh = Core::make('helper/form/user_selector')
             <div class="list-group team-list-item" data-gID="<?=$key?>">
                 <a class="list-group-heading d-flex justify-content-between align-items-center"  data-toggle="collapse" href="#team-collapse-<?=$group->getGroupID();?>">
                     <span class="h4" title="<?=t('Show team members')?>"><?=$group->getGroupName();?> </span>&nbsp;
-                    <span class="badge badge-primary badge-pill"  title="<?=t('Number of team members')?>"><?=$group->getGroupMembersNum()?>&nbsp;<i class="fa fa-user"></i></span>
-                    <span class="badge badge-success badge-pill"  title="<?=t('Wins')?>"><?=10?>&nbsp;<i class="fa fa-trophy"></i></span>
-                    <span class="badge badge-danger badge-pill"  title="<?=t('Losses')?>"><?=10?>&nbsp;<i class="fa fa-close"></i></span>
                 </a>
                 <div class="list-group-item-collapse-wrapper">
+
                     <div id="team-collapse-<?=$group->getGroupID()?>" class="list-group-item-collapse collapse">
                         <?php foreach($group->getGroupMembers() as $user): ?>
                             <div class="list-group-item">
                                 <a data-toggle="modal" data-target="#modal" data-source="/members/profile/<?=$user->getUserID()?>"  class="btn btn-outline-primary btn-round"><i class="fa fa-user"></i>  <?=$user->getUserName()?></a>
                             </div>
                         <?php endforeach; ?>
+
                         <div class="list-group-footer">
                             <form class="team-manager-invite-form form-inline" action="<?=$this->action('inviteUser')?>" method="POST">
                                 <input type="hidden" name="inviteGroup" value="<?=$group->getGroupID()?>">
                                 <input type="hidden" name="ccm_token" value="<?=Core::make('token')->generate('inviteUser');?>"/>
                                 <div class="input-group">
-                                    <?=$wh->quickSelect('inviteUser',false);?>
+                                    <?=$wh->quickSelect('inviteUser',false, ['placeholder'=>t('Select User to Invite')]);?>
                                     <div class="input-group-append">
                                         <button class="input-group-append btn btn-primary pull-right" title="<?=t('Invite Member')?>"><i class="fa fa-user-plus"></i></button>
                                     </div>
                                 </div>
                             </form>
+                            <a class="btn btn-danger btn-sm pull-right color-danger" href="<?=$this->action('leaveTeam', [$me->getUserID(), $group->getGroupID(),Core::make('token')->generate('leaveUser')])?>"><i class="fa fa-close"></i> Leave Team</a>
                         </div>
                     </div>
                 </div>

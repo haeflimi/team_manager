@@ -48,6 +48,9 @@ class Controller extends Package
                     // - h4 title text
                     'title' => t('Old Browser Alert'),
                 )));*/
+
+
+        //@todo catch the event when user leave groups so we can check if the group is one that's managed by the team manager and delete it if the last user leaves
     }
 
     public function install()
