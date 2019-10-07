@@ -73,6 +73,11 @@ class Controller extends BlockController
         $this->view();
     }
 
+    public function action_inviteUser()
+    {
+
+    }
+
     public function view()
     {
         $parentGroup = Group::getByID($this->gID);

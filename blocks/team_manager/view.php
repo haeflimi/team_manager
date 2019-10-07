@@ -22,10 +22,10 @@ $wh = Core::make('helper/form/user_selector')
                             </div>
                         <?php endforeach; ?>
                         <div class="list-group-footer">
-                            <form class="team-manager-invite-form form-inline" action="<?=$this->action('inviteUsers')?>" method="POST">
-                                <input type="hidden" name="ccm_token" value="<?=Core::make('token')->generate('inviteUsers');?>"/>
+                            <form class="team-manager-invite-form form-inline" action="<?=$this->action('inviteUser')?>" method="POST">
+                                <input type="hidden" name="ccm_token" value="<?=Core::make('token')->generate('inviteUser');?>"/>
                                 <div class="input-group">
-                                    <?=$wh->quickSelect('inviteUsers',false);?>
+                                    <?=$wh->quickSelect('inviteUser',false);?>
                                     <div class="input-group-append">
                                         <button class="input-group-append btn btn-primary pull-right" title="<?=t('Invite Member')?>"><i class="fa fa-user-plus"></i></button>
                                     </div>
